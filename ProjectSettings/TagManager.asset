@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Gems
+    uniqueID: 2910356117
+    locked: 0
+  - name: Dirt
+    uniqueID: 1365581285
+    locked: 0
+  - name: Xorn
+    uniqueID: 1389652653
+    locked: 0
