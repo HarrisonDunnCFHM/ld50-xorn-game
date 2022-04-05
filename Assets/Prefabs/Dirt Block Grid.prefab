@@ -227,7 +227,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1365581285
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}
   m_MaxChunkCount: 16
@@ -266,6 +266,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9114842424785711425}
+  - {fileID: 4109263909794122606}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -294,6 +295,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruleTile: {fileID: 11400000, guid: 34f559aff757e704b93957e9a94decfa, type: 2}
-  gemTile: {fileID: 11400000, guid: 01445922cf9039141b229b3e8ecd6546, type: 2}
   tileMap: {fileID: 9114842424785711427}
   mainCamera: {fileID: 0}
+  debris: {fileID: 4109263909794122607}
+--- !u!1001 &9114842424784862435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9114842424977320714}
+    m_Modifications:
+    - target: {fileID: 5150258861137639308, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150258861137639310, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+      propertyPath: m_Name
+      value: Debris Particles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+--- !u!4 &4109263909794122606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5150258861137639309, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+  m_PrefabInstance: {fileID: 9114842424784862435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4109263909794122607 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5150258861137639308, guid: efe2fa9ac1c02764f9a5db18ad7d3c2e, type: 3}
+  m_PrefabInstance: {fileID: 9114842424784862435}
+  m_PrefabAsset: {fileID: 0}

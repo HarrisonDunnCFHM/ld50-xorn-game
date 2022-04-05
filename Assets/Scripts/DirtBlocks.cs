@@ -8,9 +8,9 @@ public class DirtBlocks : MonoBehaviour
 {
     //config params
     [SerializeField] TileBase ruleTile;
-    [SerializeField] TileBase gemTile;
     [SerializeField] Tilemap tileMap;
     [SerializeField] Camera mainCamera;
+    [SerializeField] ParticleSystem debris;
 
     //cached references 
     Xorn xorn;
@@ -51,7 +51,6 @@ public class DirtBlocks : MonoBehaviour
                 if (!tileMap.HasTile(pos) && !alreadyDestroyed)
                 {
                     tileMap.SetTile(pos, ruleTile);
-                    Debug.Log("generating tiles...");
                 }
             }
         }
@@ -60,15 +59,24 @@ public class DirtBlocks : MonoBehaviour
     private void DigOutTile()
     {
         Vector3Int xornPos = Vector3Int.RoundToInt(xorn.transform.position);
-        tileMap.SetTile(xornPos, null);
-        removedTiles.Add(xornPos);
+        if(!removedTiles.Contains(xornPos))
+        {
+            tileMap.SetTile(xornPos, null);
+            removedTiles.Add(xornPos);
+            debris.gameObject.transform.position = xornPos;
+            debris.Play();
+        }
     }
 
     public void ChangeToGemTile(Vector3 gemLocation)
     {
         Vector3Int gemPos = Vector3Int.RoundToInt(gemLocation);
-        tileMap.SetTile(gemPos, null);
-        removedTiles.Add(gemPos);
-
+        if (!removedTiles.Contains(gemPos))
+        {
+            tileMap.SetTile(gemPos, null);
+            debris.gameObject.transform.position = gemPos;
+            debris.Play();
+            removedTiles.Add(gemPos);
+        }
     }
 }
