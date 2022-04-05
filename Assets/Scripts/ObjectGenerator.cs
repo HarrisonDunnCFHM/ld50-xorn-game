@@ -16,6 +16,7 @@ public class ObjectGenerator : MonoBehaviour
 
     //cached references
     Xorn xorn;
+    DirtBlocks dirtGrid;
     List<float> spawnThreshold = new List<float>();
     List<GameObject> spawnedObjects = new List<GameObject>();
     
@@ -29,6 +30,7 @@ public class ObjectGenerator : MonoBehaviour
     void Start()
     {
         xorn = FindObjectOfType<Xorn>();
+        dirtGrid = FindObjectOfType<DirtBlocks>();
         InitializeSpawnChances();
     }
 
@@ -64,7 +66,6 @@ public class ObjectGenerator : MonoBehaviour
         spawnedIndex.Insert(newSpawnIndex, newSpawnIndex);
         spawnedPos.Insert(newSpawnIndex, newSpawn.transform.position);
         spawnedActive.Insert(newSpawnIndex, true);
-        //spawnedType.Insert(newSpawnIndex, newSpawn.gameObject);
         foreach(GameObject gameObject in spawnableObjects)
         {
             if (objectToSpawn == gameObject)

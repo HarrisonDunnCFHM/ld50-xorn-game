@@ -8,6 +8,7 @@ public class DirtBlocks : MonoBehaviour
 {
     //config params
     [SerializeField] TileBase ruleTile;
+    [SerializeField] TileBase gemTile;
     [SerializeField] Tilemap tileMap;
     [SerializeField] Camera mainCamera;
 
@@ -55,10 +56,19 @@ public class DirtBlocks : MonoBehaviour
             }
         }
     }
+
     private void DigOutTile()
     {
         Vector3Int xornPos = Vector3Int.RoundToInt(xorn.transform.position);
         tileMap.SetTile(xornPos, null);
         removedTiles.Add(xornPos);
+    }
+
+    public void ChangeToGemTile(Vector3 gemLocation)
+    {
+        Vector3Int gemPos = Vector3Int.RoundToInt(gemLocation);
+        tileMap.SetTile(gemPos, null);
+        removedTiles.Add(gemPos);
+
     }
 }
