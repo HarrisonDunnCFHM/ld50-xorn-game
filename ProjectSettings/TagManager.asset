@@ -53,3 +53,6 @@ TagManager:
   - name: Xorn
     uniqueID: 1389652653
     locked: 0
+  - name: Shiny
+    uniqueID: 615985451
+    locked: 0
