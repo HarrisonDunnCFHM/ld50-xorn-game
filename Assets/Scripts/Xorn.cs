@@ -11,21 +11,23 @@ public class Xorn : MonoBehaviour
     [Tooltip("Distance from destination until snap-to-grid occurs.")]
     [SerializeField] float snapDistance;
     [Tooltip("Amount of time xorn will wait at each space before moving while holding a direction.")]
-    [SerializeField] float moveTimer = 0.1f; 
+    [SerializeField] float moveTimer = 0.1f;
 
     //cached references
     public bool moving = false; //check if xorn is moving
+    ObjectGenerator objectGenerator;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        objectGenerator = FindObjectOfType<ObjectGenerator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ProcessMoveInput();
+        EatGem();
     }
 
     private void SnapToGrid()
@@ -38,7 +40,7 @@ public class Xorn : MonoBehaviour
 
     private void ProcessMoveInput()
     {
-        if(Input.GetButton("up"))
+        if (Input.GetButton("up"))
         {
             StartCoroutine(MoveDirection(Vector3.up, transform.position + Vector3.up));
         }
@@ -58,7 +60,7 @@ public class Xorn : MonoBehaviour
 
     private IEnumerator MoveDirection(Vector3 direction, Vector3 destination)
     {
-        if (moving) {  yield break; }
+        if (moving) { yield break; }
         moving = true;
         float destinationDistance = Vector3.Distance(transform.position, destination);
         while (destinationDistance > snapDistance)
@@ -70,5 +72,10 @@ public class Xorn : MonoBehaviour
         yield return new WaitForSeconds(moveTimer);
         moving = false;
         SnapToGrid();
+    }
+
+    private void EatGem()
+    {
+
     }
 }

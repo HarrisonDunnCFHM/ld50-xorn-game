@@ -18,13 +18,15 @@ public class ObjectGenerator : MonoBehaviour
     Xorn xorn;
     DirtBlocks dirtGrid;
     List<float> spawnThreshold = new List<float>();
-    List<GameObject> spawnedObjects = new List<GameObject>();
+    public List<GameObject> spawnedObjects = new List<GameObject>();
     
     //track all previously spawned objects - only set these once
     List<int> spawnedIndex = new List<int>();
     List<Vector3> spawnedPos = new List<Vector3>();
     List<bool> spawnedActive = new List<bool>();
     List<GameObject> spawnedType = new List<GameObject>();
+    public List<bool> destroyedGem = new List<bool>();
+    public List<bool> maskActive = new List<bool>();
     
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,8 @@ public class ObjectGenerator : MonoBehaviour
         spawnedIndex.Insert(newSpawnIndex, newSpawnIndex);
         spawnedPos.Insert(newSpawnIndex, newSpawn.transform.position);
         spawnedActive.Insert(newSpawnIndex, true);
+        destroyedGem.Insert(newSpawnIndex, false);
+        maskActive.Insert(newSpawnIndex, false);
         foreach(GameObject gameObject in spawnableObjects)
         {
             if (objectToSpawn == gameObject)
@@ -73,6 +77,7 @@ public class ObjectGenerator : MonoBehaviour
                 spawnedType.Insert(newSpawnIndex, gameObject);
             }
         }
+        newSpawn.name += newSpawnIndex;
     }
 
     private GameObject PickObjectToSpawn()
@@ -99,7 +104,7 @@ public class ObjectGenerator : MonoBehaviour
     {
         for(int i = 0; i < spawnedPos.Count; i++)
         {
-            if (spawnedActive[i] == false)
+            if (!spawnedActive[i])
             {
                 var distToPlayer = Vector3.Magnitude(spawnedPos[i] - xorn.transform.position);
                 if (distToPlayer < maxSpawnDistance)
@@ -116,7 +121,13 @@ public class ObjectGenerator : MonoBehaviour
     {
         var newSpawn = Instantiate(spawnedType[indexToSpawn], spawnedPos[indexToSpawn], Quaternion.identity);
         spawnedObjects.Add(newSpawn);
+        newSpawn.name += indexToSpawn;
+        SpawnedObject spawnedComponent = newSpawn.GetComponent<SpawnedObject>();
         newSpawn.GetComponent<SpawnedObject>().myIndex = indexToSpawn;
+        if(destroyedGem[indexToSpawn])
+        {
+            newSpawn.GetComponent<SpriteRenderer>().sprite = newSpawn.GetComponent<SpawnedObject>().brokenSprite;
+        }
         spawnedActive[indexToSpawn] = true;
     }
 
