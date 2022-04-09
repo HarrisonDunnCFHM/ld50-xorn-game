@@ -16,11 +16,19 @@ public class Xorn : MonoBehaviour
     //cached references
     public bool moving = false; //check if xorn is moving
     ObjectGenerator objectGenerator;
+    Animator myAnimator;
+    SpriteMask myMask;
+    SpriteRenderer myRenderer;
+    Transform myBody;
 
     // Start is called before the first frame update
     void Start()
     {
         objectGenerator = FindObjectOfType<ObjectGenerator>();
+        myAnimator = GetComponentInChildren<Animator>();
+        myMask = GetComponentInChildren<SpriteMask>();
+        myRenderer = GetComponentInChildren<SpriteRenderer>();
+        myBody = GetComponentInChildren<Transform>();
     }
 
     // Update is called once per frame
@@ -28,6 +36,7 @@ public class Xorn : MonoBehaviour
     {
         ProcessMoveInput();
         EatGem();
+        ControlAnimation();
     }
 
     private void SnapToGrid()
@@ -51,10 +60,12 @@ public class Xorn : MonoBehaviour
         if (Input.GetButton("left"))
         {
             StartCoroutine(MoveDirection(Vector3.left, transform.position + Vector3.left));
+            myBody.localScale =  new Vector3 (-1, 1, 1);
         }
         if (Input.GetButton("right"))
         {
             StartCoroutine(MoveDirection(Vector3.right, transform.position + Vector3.right));
+            myBody.localScale = new Vector3(1, 1, 1); ;
         }
     }
 
@@ -77,5 +88,10 @@ public class Xorn : MonoBehaviour
     private void EatGem()
     {
 
+    }
+
+    public void ControlAnimation()
+    {
+        myMask.sprite = myRenderer.sprite;
     }
 }

@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: c6cbfd735e353314f8ab8b505fc24be3
+guid: c00899b819d03024aa700c486071a27d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2549595118217475139
-    second: gem_broken_0
+      213: -844427815829485520
+    second: xorn_side_sheet_001_0
   - first:
-      213: -1968902427664930979
-    second: gem_broken_1
+      213: 7066740290659055277
+    second: xorn_side_sheet_001_1
   - first:
-      213: 2501647354534690480
-    second: gem_broken_2
+      213: -4992008796500942304
+    second: xorn_side_sheet_001_2
+  - first:
+      213: 1156358926222469707
+    second: xorn_side_sheet_001_3
+  - first:
+      213: 6519081325211136610
+    second: xorn_side_sheet_001_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gem_broken_0
+      name: xorn_side_sheet_001_0
       rect:
         serializedVersion: 2
         x: 0
@@ -126,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbbc3919fb40e9cd0800000000000000
-      internalID: -2549595118217475139
+      spriteID: 038460f106df744f0800000000000000
+      internalID: -844427815829485520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gem_broken_1
+      name: xorn_side_sheet_001_1
       rect:
         serializedVersion: 2
         x: 64
@@ -147,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d57a0a97cad0da4e0800000000000000
-      internalID: -1968902427664930979
+      spriteID: da67ca86ada121260800000000000000
+      internalID: 7066740290659055277
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gem_broken_2
+      name: xorn_side_sheet_001_2
       rect:
         serializedVersion: 2
         x: 128
@@ -168,8 +174,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bef550c303a7b220800000000000000
-      internalID: 2501647354534690480
+      spriteID: 022afe8c272d8bab0800000000000000
+      internalID: -4992008796500942304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xorn_side_sheet_001_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4aa75611563c0010800000000000000
+      internalID: 1156358926222469707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xorn_side_sheet_001_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 262b71bfced687a50800000000000000
+      internalID: 6519081325211136610
       vertices: []
       indices: 
       edges: []
