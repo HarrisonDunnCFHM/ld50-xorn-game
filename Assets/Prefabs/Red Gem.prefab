@@ -4983,8 +4983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c273c3f01998346a78ce0891afc834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkleTimerMax: 15
-  sparkleTimerMin: 9
+  sparkleTimerMax: 2
+  sparkleTimerMin: 1
   myColor: 0
   brokenSprite: {fileID: 2501647354534690480, guid: c6cbfd735e353314f8ab8b505fc24be3, type: 3}
   mySparkles: {fileID: 871675314}
