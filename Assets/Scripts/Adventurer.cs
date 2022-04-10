@@ -123,6 +123,7 @@ public class Adventurer : MonoBehaviour
 
     private void PursuitMode()
     {
+        if (moving) { return; }
         if(xornFound)
         {
             moveSpeed = pursuitSpeed;
@@ -151,7 +152,7 @@ public class Adventurer : MonoBehaviour
     }
     private void PickNewDirection()
     {
-        if (moving || xornFound) { return; }
+        if (moving) { return; }
         _directions = new List<Vector3Int>() { Vector3Int.up, Vector3Int.right, Vector3Int.down, Vector3Int.left };
         List<Vector3Int> possibleDirections = new List<Vector3Int>() { Vector3Int.up, Vector3Int.right, Vector3Int.down, Vector3Int.left };
         foreach (Vector3Int possibleDirection in _directions)
@@ -165,13 +166,13 @@ public class Adventurer : MonoBehaviour
                 possibleDirections.Remove(possibleDirection);
             }
         }
+        if(xornFound && !possibleDirections.Contains(currentDirection))
+        {
+            xornFound = false;
+        }
         if (possibleDirections.Count == 0)
         {
             currentDirection = -currentDirection;
-        }
-        else if (possibleDirections.Count == 4)
-        {
-            return;
         }
         else
         {
