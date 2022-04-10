@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Stomachs : MonoBehaviour
 {
@@ -55,6 +56,26 @@ public class Stomachs : MonoBehaviour
             default:
                 Debug.Log("Invalid color provided - no stomach for this color!");
                 break;
+        }
+    }
+
+    public void TakeHit()
+    {
+        if(redStomach.value > 0)
+        {
+            redStomach.value = 0;
+        }
+        else if (greenStomach.value > 0)
+        {
+            greenStomach.value = 0;
+        }
+        else if (blueStomach.value > 0)
+        {
+            blueStomach.value = 0;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

@@ -11,20 +11,26 @@ public class Adventurer : MonoBehaviour
     [SerializeField] float snapDistance = 0.1f;
 
     //cached references
+    Xorn xorn;
+    Stomachs stomachs;
     DirtBlocks dirtBlocks;
+    AdventurerSpawner mySpawner;
     public List<Vector3Int> tilesVisited = new List<Vector3Int>();
     public List<int> tilesVisitedCount = new List<int>();
     public bool moving = false;
     public Vector3Int currentDirection;
-    Vector3Int nextDestination;
     public List<Vector3Int> _directions = new List<Vector3Int>();
     public List<Vector3Int> possibleDirections = new List<Vector3Int>();
+    public int myIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         dirtBlocks = FindObjectOfType<DirtBlocks>();
         PickStartingDirection();
+        xorn = FindObjectOfType<Xorn>();
+        stomachs = FindObjectOfType<Stomachs>();
+        mySpawner = FindObjectOfType<AdventurerSpawner>();
     }
 
     // Update is called once per frame
@@ -32,6 +38,7 @@ public class Adventurer : MonoBehaviour
     {
         PickNewDirection();
         StartCoroutine(MoveInDirection());
+        CheckForXorn();
     }
 
     private void PickStartingDirection()
@@ -87,21 +94,23 @@ public class Adventurer : MonoBehaviour
         var destination = transform.position + currentDirection;
         while (destinationDistance > snapDistance)
         {
-            Debug.Log("trying to move to " + transform.position + currentDirection);
             destinationDistance = Vector3.Distance(transform.position, destination);
             transform.position += ((Vector3)currentDirection * moveSpeed * Time.deltaTime);
             yield return null;
         }
         yield return new WaitForSeconds(moveCooldown);
         moving = false;
-        SnapToGrid();
-    }
-    private void SnapToGrid()
-    {
-        if (moving) { return; }
-        int newX = Mathf.RoundToInt(transform.position.x);
-        int newY = Mathf.RoundToInt(transform.position.y);
-        transform.position = new Vector3(newX, newY, transform.position.z);
+        transform.position = Vector3Int.RoundToInt(transform.position);
     }
 
+    private void CheckForXorn()
+    {
+        float distToXorn = Vector3.Distance(transform.position, xorn.transform.position);
+        if (distToXorn < xorn.deathDistance)
+        {
+            stomachs.TakeHit();
+            mySpawner.currentSpawned--;
+            Destroy(gameObject);
+        }
+    }
 }

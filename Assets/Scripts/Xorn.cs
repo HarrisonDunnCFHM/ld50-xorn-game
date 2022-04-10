@@ -12,6 +12,7 @@ public class Xorn : MonoBehaviour
     [SerializeField] float snapDistance;
     [Tooltip("Amount of time xorn will wait at each space before moving while holding a direction.")]
     [SerializeField] float moveTimer = 0.1f;
+    [SerializeField] public float deathDistance = 0.9f;
 
     //cached references
     public bool moving = false; //check if xorn is moving

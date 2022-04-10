@@ -9,18 +9,21 @@ public class AdventurerSpawner : MonoBehaviour
     [SerializeField] Adventurer adventurerPrefab;
     [SerializeField] int maxAdventurers = 10;
     [SerializeField] float spawnDistance = 5f;
+    [SerializeField] float spawnCooldown = 3f;
 
     //cached references
     Xorn xorn;
-    List<GameObject> spawnedAdventurers = new List<GameObject>();
+    public int currentSpawned;
     DirtBlocks dirtBlocks;
     Vector3Int lastSpawnedPos;
+    float spawnTimer;
     
     // Start is called before the first frame update
     void Start()
     {
         xorn = FindObjectOfType<Xorn>();
         dirtBlocks = FindObjectOfType<DirtBlocks>();
+        spawnTimer = spawnCooldown;
     }
 
     // Update is called once per frame
@@ -31,23 +34,32 @@ public class AdventurerSpawner : MonoBehaviour
 
     private void SpawnAdventurers()
     {
-        List<Vector3Int> possibleSpawns = new List<Vector3Int>();
-        if(spawnedAdventurers.Count < maxAdventurers)
+        if (spawnTimer >= spawnCooldown)
         {
-            foreach(Vector3Int tilePos in dirtBlocks.removedTiles)
+            List<Vector3Int> possibleSpawns = new List<Vector3Int>();
+            if (currentSpawned < maxAdventurers)
             {
-                float distToXorn = Vector3.Distance(xorn.transform.position, tilePos);
-                if (distToXorn >= spawnDistance && tilePos != lastSpawnedPos)
+                foreach (Vector3Int tilePos in dirtBlocks.removedTiles)
                 {
-                    possibleSpawns.Add(tilePos);
+                    float distToXorn = Vector3.Distance(xorn.transform.position, tilePos);
+                    if (distToXorn >= spawnDistance && tilePos != lastSpawnedPos)
+                    {
+                        possibleSpawns.Add(tilePos);
+                    }
                 }
             }
+            if (possibleSpawns.Count == 0) { return; }
+            int newSpawnIndex = UnityEngine.Random.Range(0, possibleSpawns.Count);
+            GameObject newAdventurer = Instantiate(adventurerPrefab.gameObject, possibleSpawns[newSpawnIndex], Quaternion.identity);
+            lastSpawnedPos = possibleSpawns[newSpawnIndex];
+            newAdventurer.transform.SetParent(transform);
+            newAdventurer.GetComponent<Adventurer>().myIndex = newSpawnIndex;
+            currentSpawned++;
+            spawnTimer = 0;
         }
-        if(possibleSpawns.Count == 0) { return; }
-        int newSpawnIndex = UnityEngine.Random.Range(0, possibleSpawns.Count);
-        GameObject newAdventurer = Instantiate(adventurerPrefab.gameObject, possibleSpawns[newSpawnIndex], Quaternion.identity);
-        lastSpawnedPos = possibleSpawns[newSpawnIndex];
-        newAdventurer.transform.SetParent(transform);
-        spawnedAdventurers.Add(newAdventurer);
+        else
+        {
+            spawnTimer += Time.deltaTime;
+        }
     }
 }

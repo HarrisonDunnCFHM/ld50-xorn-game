@@ -158,8 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adventurerPrefab: {fileID: 6340504868755586690, guid: 8a96ae4e47f20f647a4262f5a99af746, type: 3}
-  maxAdventurers: 1
+  maxAdventurers: 3
   spawnDistance: 5
+  spawnCooldown: 3
+  currentSpawned: 0
 --- !u!4 &278986146
 Transform:
   m_ObjectHideFlags: 0
