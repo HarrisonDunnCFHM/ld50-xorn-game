@@ -95,8 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8f7168f377a2442acf152a85dd6abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  moveCooldown: 0.5
+  normalSpeed: 5
+  pursuitSpeed: 5
+  normalMoveCooldown: 0.5
+  pursuitMoveCooldown: 0.1
   snapDistance: 0.1
   tilesVisited: []
   tilesVisitedCount: 
@@ -108,3 +110,4 @@ MonoBehaviour:
   - {x: 0, y: -1, z: 0}
   - {x: -1, y: 0, z: 0}
   possibleDirections: []
+  myIndex: 0
