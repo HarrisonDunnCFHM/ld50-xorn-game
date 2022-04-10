@@ -47,6 +47,7 @@ MonoBehaviour:
   moveSpeed: 6
   snapDistance: 0.1
   moveTimer: 0
+  deathDistance: 0.3
   moving: 0
 --- !u!1 &6274493143035136754
 GameObject:
@@ -61,7 +62,7 @@ GameObject:
   - component: {fileID: 7398817366044829291}
   - component: {fileID: 7398817366044829288}
   m_Layer: 0
-  m_Name: Xorn
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 1389652653
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5881e438009d1a4e80830f2415fe805, type: 3}
+  m_Sprite: {fileID: -2816737911058492076, guid: 801b253df36a21f49a697dc1bc2cbbd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

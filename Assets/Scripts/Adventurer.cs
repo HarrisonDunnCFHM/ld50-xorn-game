@@ -18,6 +18,7 @@ public class Adventurer : MonoBehaviour
     Stomachs stomachs;
     DirtBlocks dirtBlocks;
     AdventurerSpawner mySpawner;
+    Animator myAnimator;
     public List<Vector3Int> tilesVisited = new List<Vector3Int>();
     public List<int> tilesVisitedCount = new List<int>();
     public bool moving = false;
@@ -37,6 +38,7 @@ public class Adventurer : MonoBehaviour
         xorn = FindObjectOfType<Xorn>();
         stomachs = FindObjectOfType<Stomachs>();
         mySpawner = FindObjectOfType<AdventurerSpawner>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,8 +49,28 @@ public class Adventurer : MonoBehaviour
         PursuitMode();
         StartCoroutine(MoveInDirection());
         AttackXorn();
+        Animate();
     }
 
+    private void Animate()
+    {
+        if(currentDirection == Vector3Int.up)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 180);
+        }
+        else if (currentDirection == Vector3Int.right)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 90);
+        }
+        else if (currentDirection == Vector3Int.down)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (currentDirection == Vector3Int.left)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 270);
+        }
+    }
 
     private void SearchForXorn()
     {

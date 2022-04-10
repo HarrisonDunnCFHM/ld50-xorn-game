@@ -52,20 +52,22 @@ public class Xorn : MonoBehaviour
         if (Input.GetButton("up"))
         {
             StartCoroutine(MoveDirection(Vector3.up, transform.position + Vector3.up));
+            myBody.localEulerAngles = new Vector3(0, 0, 180);
         }
         if (Input.GetButton("down"))
         {
             StartCoroutine(MoveDirection(Vector3.down, transform.position + Vector3.down));
+            myBody.localEulerAngles = new Vector3(0, 0, 0);
         }
         if (Input.GetButton("left"))
         {
             StartCoroutine(MoveDirection(Vector3.left, transform.position + Vector3.left));
-            myBody.localScale =  new Vector3 (-1, 1, 1);
+            myBody.localEulerAngles =  new Vector3(0, 0, 270);
         }
         if (Input.GetButton("right"))
         {
             StartCoroutine(MoveDirection(Vector3.right, transform.position + Vector3.right));
-            myBody.localScale = new Vector3(1, 1, 1); ;
+            myBody.localEulerAngles = new Vector3(0, 0, 90);
         }
     }
 
@@ -90,5 +92,13 @@ public class Xorn : MonoBehaviour
     public void ControlAnimation()
     {
         myMask.sprite = myRenderer.sprite;
+        if(moving)
+        {
+            myAnimator.StopPlayback();
+        }
+        else
+        {
+            myAnimator.StartPlayback();
+        }
     }
 }

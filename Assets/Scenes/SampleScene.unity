@@ -741,10 +741,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Xorn
       objectReference: {fileID: 0}
-    - target: {fileID: 6274493143035136754, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
-      propertyPath: m_Name
-      value: Body
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
 --- !u!1001 &3827330662772025342
