@@ -16,7 +16,7 @@ public class DirtBlocks : MonoBehaviour
     Xorn xorn;
     int maxSpawnX;
     int maxSpawnY;
-    List<Vector3Int> removedTiles = new List<Vector3Int>();
+    public List<Vector3Int> removedTiles = new List<Vector3Int>();
 
     // Start is called before the first frame update
     void Start()

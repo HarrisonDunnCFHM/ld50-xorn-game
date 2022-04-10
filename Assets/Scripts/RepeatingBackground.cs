@@ -70,7 +70,6 @@ public class RepeatingBackground : MonoBehaviour
                     && xornY > spawnedTileY - tileHeight / 2)
                 {
                     activeTile = tile;
-                    Debug.Log("new active tile is " + tile.name);
                     break;
                 }
 
@@ -212,7 +211,6 @@ public class RepeatingBackground : MonoBehaviour
                 {
                     if (spawnedTiles.ElementAtOrDefault(8) != null)
                     {
-                        Debug.Log("Destroying "  + spawnedTiles[8].name);
                         Destroy(spawnedTiles[8]);
                     }
                     else

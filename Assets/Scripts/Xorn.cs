@@ -35,7 +35,6 @@ public class Xorn : MonoBehaviour
     void Update()
     {
         ProcessMoveInput();
-        EatGem();
         ControlAnimation();
     }
 
@@ -85,10 +84,7 @@ public class Xorn : MonoBehaviour
         SnapToGrid();
     }
 
-    private void EatGem()
-    {
 
-    }
 
     public void ControlAnimation()
     {
