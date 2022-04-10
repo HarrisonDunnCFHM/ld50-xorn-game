@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Adventurer : MonoBehaviour
 {
@@ -92,7 +93,7 @@ public class Adventurer : MonoBehaviour
                 for (int i = myX; myX < xornX; i++)
                 {
                     Vector3Int posToCheck = new Vector3Int(i, myY, Mathf.RoundToInt(transform.position.z));
-                    if (!dirtBlocks.removedTiles.Contains(posToCheck))
+                    if (dirtBlocks.GetComponentInChildren<Tilemap>().HasTile(posToCheck))
                     {
                         break;
                     }
@@ -155,20 +156,35 @@ public class Adventurer : MonoBehaviour
         if (moving) { return; }
         _directions = new List<Vector3Int>() { Vector3Int.up, Vector3Int.right, Vector3Int.down, Vector3Int.left };
         List<Vector3Int> possibleDirections = new List<Vector3Int>() { Vector3Int.up, Vector3Int.right, Vector3Int.down, Vector3Int.left };
-        foreach (Vector3Int possibleDirection in _directions)
+        if(xornFound)
         {
-            if (!dirtBlocks.removedTiles.Contains(possibleDirection + Vector3Int.RoundToInt(transform.position)))
+            foreach(Vector3Int possibleDirection in _directions)
             {
-                possibleDirections.Remove(possibleDirection);
-            }
-            if (possibleDirection == -currentDirection)
-            {
-                possibleDirections.Remove(possibleDirection);
+                if (possibleDirection == currentDirection && !dirtBlocks.removedTiles.Contains(possibleDirection + Vector3Int.RoundToInt(transform.position)))
+                {
+                    xornFound = false;
+                    break;
+                }
+                else if (currentDirection != possibleDirection)
+                {
+                    possibleDirections.Remove(possibleDirection);
+                }
             }
         }
-        if(xornFound && !possibleDirections.Contains(currentDirection))
+        if (!xornFound)
         {
-            xornFound = false;
+            possibleDirections = new List<Vector3Int>() { Vector3Int.up, Vector3Int.right, Vector3Int.down, Vector3Int.left };
+            foreach (Vector3Int possibleDirection in _directions)
+            {
+                if (!dirtBlocks.removedTiles.Contains(possibleDirection + Vector3Int.RoundToInt(transform.position)))
+                {
+                    possibleDirections.Remove(possibleDirection);
+                }
+                if (possibleDirection == -currentDirection)
+                {
+                    possibleDirections.Remove(possibleDirection);
+                }
+            }
         }
         if (possibleDirections.Count == 0)
         {
