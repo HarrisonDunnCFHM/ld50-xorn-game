@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class SpawnedObject : MonoBehaviour
 {
@@ -15,17 +16,22 @@ public class SpawnedObject : MonoBehaviour
     [SerializeField] public Sprite brokenSprite;
     [SerializeField] ParticleSystem mySparkles;
     [SerializeField] ParticleSystem gemDebris;
+    [SerializeField] float minFlickerTime = 0.1f;
+    [SerializeField] float maxFlickerTime = 0.3f;
 
 
     //cached refs
     public int myIndex;
     DirtBlocks dirtBlocks;
     Xorn xorn;
-    float sparkleTimer = 0f;
+    float sparkleTimer;
     public SpriteMask myMask;
     ObjectGenerator objectGenerator;
     Stomachs stomachs;
     SpriteRenderer myRenderer;
+    Light2D myLight;
+    float myDefaultBrightness;
+    float flickerTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,9 +42,14 @@ public class SpawnedObject : MonoBehaviour
         objectGenerator = FindObjectOfType<ObjectGenerator>();
         stomachs = FindObjectOfType<Stomachs>();
         myRenderer = GetComponent<SpriteRenderer>();
-        if(objectGenerator.destroyedGem[myIndex])
+        myLight = GetComponentInChildren<Light2D>();
+        myDefaultBrightness = myLight.intensity;
+        myLight.intensity = 0;
+        sparkleTimer = UnityEngine.Random.Range(sparkleTimerMin, sparkleTimerMax * 2);
+        if (objectGenerator.destroyedGem[myIndex])
         {
             myMask.sprite = brokenSprite;
+            myLight.enabled = false;
         }
     }
 
@@ -48,7 +59,30 @@ public class SpawnedObject : MonoBehaviour
         UncoverGem();
         Sparkle();
         GetEaten();
+        Flicker();
         myMask.enabled = objectGenerator.maskActive[myIndex];
+    }
+
+    private void Flicker()
+    {
+        if(stomachs.greenStomach.value > 0)
+        {
+            if(flickerTimer <= 0)
+            {
+                float newIntensity = UnityEngine.Random.Range(myDefaultBrightness/2, myDefaultBrightness);
+                myLight.intensity = newIntensity;
+                float randomTime = UnityEngine.Random.Range(minFlickerTime, maxFlickerTime);
+                flickerTimer = randomTime;
+            }
+            else
+            {
+                flickerTimer -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            myLight.intensity = 0;
+        }
     }
 
     private void Sparkle()
@@ -77,6 +111,7 @@ public class SpawnedObject : MonoBehaviour
                 myRenderer.sprite = brokenSprite;
                 myMask.sprite = brokenSprite;
                 gemDebris.Play();
+                myLight.enabled = false;
             }
         }
     }
