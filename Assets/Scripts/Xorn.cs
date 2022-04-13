@@ -8,10 +8,11 @@ public class Xorn : MonoBehaviour
 
     //configuration parameters
     [SerializeField] float moveSpeed;
+    [SerializeField] float defaultMoveTimer;
+    [SerializeField] float fedMoveTimer;
     [Tooltip("Distance from destination until snap-to-grid occurs.")]
     [SerializeField] float snapDistance;
     [Tooltip("Amount of time xorn will wait at each space before moving while holding a direction.")]
-    [SerializeField] float moveTimer = 0.1f;
     [SerializeField] public float deathDistance = 0.9f;
 
     //cached references
@@ -21,6 +22,8 @@ public class Xorn : MonoBehaviour
     SpriteMask myMask;
     SpriteRenderer myRenderer;
     Transform myBody;
+    Stomachs stomachs;
+    float moveTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +33,27 @@ public class Xorn : MonoBehaviour
         myMask = GetComponentInChildren<SpriteMask>();
         myRenderer = GetComponentInChildren<SpriteRenderer>();
         myBody = GetComponentInChildren<Transform>();
+        stomachs = FindObjectOfType<Stomachs>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckMoveTimer();
         ProcessMoveInput();
         ControlAnimation();
+    }
+
+    private void CheckMoveTimer()
+    {
+        if(stomachs.blueStomach.value > 0)
+        {
+            moveTimer = fedMoveTimer;
+        }
+        else
+        {
+            moveTimer = defaultMoveTimer;
+        }
     }
 
     private void SnapToGrid()
@@ -83,6 +100,7 @@ public class Xorn : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(moveTimer);
+        stomachs.blueStomach.value -= stomachs.blueDecayRate;
         moving = false;
         SnapToGrid();
     }

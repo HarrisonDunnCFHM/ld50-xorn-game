@@ -11,13 +11,15 @@ public class Stomachs : MonoBehaviour
     [SerializeField] public Slider blueStomach;
     [SerializeField] int blueMaxCapacity;
     [SerializeField] float blueIngestRate;
+    public float blueDecayRate;
     [SerializeField] public Slider greenStomach;
     [SerializeField] int greenMaxCapacity;
     [SerializeField] float greenIngestRate;
+    public float greenDecayRate;
     [SerializeField] public Slider redStomach;
     [SerializeField] int redMaxCapacity;
     [SerializeField] float redIngestRate;
-    [SerializeField] float decayRate;
+    public float redDecayRate;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +37,9 @@ public class Stomachs : MonoBehaviour
 
     private void StomachDecay()
     {
-        blueStomach.value -= Time.deltaTime * decayRate;
-        greenStomach.value -= Time.deltaTime * decayRate;
-        redStomach.value -= Time.deltaTime * decayRate;
+        //blueStomach.value -= Time.deltaTime * blueDecayRate;
+        greenStomach.value -= Time.deltaTime * greenDecayRate;
+        //redStomach.value -= Time.deltaTime * redDecayRate;
     }
 
     public void IngestGem(SpawnedObject.GemColor gemColor)
@@ -63,7 +65,7 @@ public class Stomachs : MonoBehaviour
     {
         if(redStomach.value > 0)
         {
-            redStomach.value = 0;
+            redStomach.value -= redDecayRate;
         }
         else if (greenStomach.value > 0)
         {

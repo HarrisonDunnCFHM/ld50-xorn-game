@@ -9,7 +9,7 @@ public class ObjectGenerator : MonoBehaviour
     [SerializeField] int maxSpawnableObjects;
     [SerializeField] int minSpawnDistance;
     [SerializeField] int maxSpawnDistance;
-    [SerializeField] int minDistanceBetweenObjects;
+    //[SerializeField] int minDistanceBetweenObjects;
     [SerializeField] List<GameObject> spawnableObjects;
     [SerializeField] List<int> spawnableChances;
 

@@ -32,6 +32,7 @@ public class SpawnedObject : MonoBehaviour
     Light2D myLight;
     float myDefaultBrightness;
     float flickerTimer = 0f;
+    bool sparkling = true;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class SpawnedObject : MonoBehaviour
         {
             myMask.sprite = brokenSprite;
             myLight.enabled = false;
+            sparkling = false;
         }
     }
 
@@ -87,6 +89,7 @@ public class SpawnedObject : MonoBehaviour
 
     private void Sparkle()
     {
+        if(!sparkling) { return; }
         if(sparkleTimer <= 0f)
         {
             mySparkles.Play();
@@ -112,6 +115,7 @@ public class SpawnedObject : MonoBehaviour
                 myMask.sprite = brokenSprite;
                 gemDebris.Play();
                 myLight.enabled = false;
+                sparkling = false;
             }
         }
     }

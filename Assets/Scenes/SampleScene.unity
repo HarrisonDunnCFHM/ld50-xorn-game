@@ -720,15 +720,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blueStomach: {fileID: 1169878030}
-  blueMaxCapacity: 20
-  blueIngestRate: 15
+  blueMaxCapacity: 50
+  blueIngestRate: 25
+  blueDecayRate: 2
   greenStomach: {fileID: 803917540}
   greenMaxCapacity: 20
   greenIngestRate: 20
+  greenDecayRate: 4
   redStomach: {fileID: 729214177}
-  redMaxCapacity: 50
-  redIngestRate: 40
-  decayRate: 1
+  redMaxCapacity: 30
+  redIngestRate: 10
+  redDecayRate: 10
 --- !u!1001 &3584473278151882811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,6 +781,18 @@ PrefabInstance:
     - target: {fileID: 3584473278192059121, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584473278192059123, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
+      propertyPath: moveTimer
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584473278192059123, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
+      propertyPath: fedMoveTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584473278192059123, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
+      propertyPath: defaultMoveTimer
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3584473278192059132, guid: 7fee90675f5186f4bbdc4af1977ff793, type: 3}
       propertyPath: m_Name
@@ -840,6 +854,22 @@ PrefabInstance:
     - target: {fileID: 3827330664078245664, guid: 5da80ed55e6c80b48a3e2377a2f9ec6e, type: 3}
       propertyPath: m_Name
       value: Generated Objects
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827330664078245665, guid: 5da80ed55e6c80b48a3e2377a2f9ec6e, type: 3}
+      propertyPath: minSpawnDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827330664078245665, guid: 5da80ed55e6c80b48a3e2377a2f9ec6e, type: 3}
+      propertyPath: spawnableChances.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827330664078245665, guid: 5da80ed55e6c80b48a3e2377a2f9ec6e, type: 3}
+      propertyPath: spawnableChances.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3827330664078245665, guid: 5da80ed55e6c80b48a3e2377a2f9ec6e, type: 3}
+      propertyPath: spawnableChances.Array.data[2]
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5da80ed55e6c80b48a3e2377a2f9ec6e, type: 3}
