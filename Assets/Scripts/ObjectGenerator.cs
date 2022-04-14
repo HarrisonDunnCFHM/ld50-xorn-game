@@ -9,14 +9,12 @@ public class ObjectGenerator : MonoBehaviour
     [SerializeField] int maxSpawnableObjects;
     [SerializeField] int minSpawnDistance;
     [SerializeField] int maxSpawnDistance;
-    //[SerializeField] int minDistanceBetweenObjects;
     [SerializeField] List<GameObject> spawnableObjects;
     [SerializeField] List<int> spawnableChances;
 
 
     //cached references
     Xorn xorn;
-    DirtBlocks dirtGrid;
     List<float> spawnThreshold = new List<float>();
     public List<GameObject> spawnedObjects = new List<GameObject>();
     
@@ -32,7 +30,6 @@ public class ObjectGenerator : MonoBehaviour
     void Start()
     {
         xorn = FindObjectOfType<Xorn>();
-        dirtGrid = FindObjectOfType<DirtBlocks>();
         InitializeSpawnChances();
     }
 

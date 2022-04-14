@@ -7,7 +7,7 @@ public class AdventurerSpawner : MonoBehaviour
 {
     //config params
     [SerializeField] Adventurer adventurerPrefab;
-    [SerializeField] int maxAdventurers = 10;
+    [SerializeField] int maxAdventurers;
     [SerializeField] float spawnDistance = 5f;
     [SerializeField] float spawnCooldown = 3f;
 
@@ -17,6 +17,7 @@ public class AdventurerSpawner : MonoBehaviour
     DirtBlocks dirtBlocks;
     Vector3Int lastSpawnedPos;
     float spawnTimer;
+    SessionManager sessionManager;
     
     // Start is called before the first frame update
     void Start()
@@ -24,12 +25,19 @@ public class AdventurerSpawner : MonoBehaviour
         xorn = FindObjectOfType<Xorn>();
         dirtBlocks = FindObjectOfType<DirtBlocks>();
         spawnTimer = spawnCooldown;
+        sessionManager = FindObjectOfType<SessionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         SpawnAdventurers();
+        UpdateMaxAdventurers();
+    }
+
+    private void UpdateMaxAdventurers()
+    {
+        maxAdventurers = sessionManager.gemCount / 2;
     }
 
     private void SpawnAdventurers()

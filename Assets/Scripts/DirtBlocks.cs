@@ -11,17 +11,20 @@ public class DirtBlocks : MonoBehaviour
     [SerializeField] Tilemap tileMap;
     [SerializeField] Camera mainCamera;
     [SerializeField] ParticleSystem debris;
+    [SerializeField] List<AudioClip> myAudioClips;
 
     //cached references 
     Xorn xorn;
     int maxSpawnX;
     int maxSpawnY;
     public List<Vector3Int> removedTiles = new List<Vector3Int>();
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         xorn = FindObjectOfType<Xorn>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -65,7 +68,14 @@ public class DirtBlocks : MonoBehaviour
             removedTiles.Add(xornPos);
             debris.gameObject.transform.position = xornPos;
             debris.Play();
+            PlayDirtNoise();
         }
+    }
+
+    private void PlayDirtNoise()
+    {
+        int randomIndex = UnityEngine.Random.Range(0,myAudioClips.Count);
+        AudioSource.PlayClipAtPoint(myAudioClips[randomIndex], xorn.transform.position, audioManager.sfxVol);
     }
 
     public void ChangeToGemTile(Vector3 gemLocation)

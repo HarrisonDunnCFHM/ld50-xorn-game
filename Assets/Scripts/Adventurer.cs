@@ -29,6 +29,7 @@ public class Adventurer : MonoBehaviour
     bool xornFound = false;
     float moveSpeed;
     float moveCooldown;
+    SessionManager sessionManager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,17 +40,25 @@ public class Adventurer : MonoBehaviour
         stomachs = FindObjectOfType<Stomachs>();
         mySpawner = FindObjectOfType<AdventurerSpawner>();
         myAnimator = GetComponent<Animator>();
+        sessionManager = FindObjectOfType<SessionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateMoveCooldown();
         SearchForXorn();
         PickNewDirection();
         PursuitMode();
         StartCoroutine(MoveInDirection());
         AttackXorn();
         Animate();
+    }
+
+    private void UpdateMoveCooldown()
+    {
+        moveCooldown = normalMoveCooldown - sessionManager.gemCount/10;
+        if(moveCooldown < 0) { moveCooldown = 0; }
     }
 
     private void Animate()

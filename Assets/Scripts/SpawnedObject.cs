@@ -18,6 +18,7 @@ public class SpawnedObject : MonoBehaviour
     [SerializeField] ParticleSystem gemDebris;
     [SerializeField] float minFlickerTime = 0.1f;
     [SerializeField] float maxFlickerTime = 0.3f;
+    [SerializeField] List<AudioClip> gemClips;
 
 
     //cached refs
@@ -33,20 +34,26 @@ public class SpawnedObject : MonoBehaviour
     float myDefaultBrightness;
     float flickerTimer = 0f;
     bool sparkling = true;
+    SessionManager sessionManager;
+    AudioSource myAudioSource;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         xorn = FindObjectOfType<Xorn>();
         dirtBlocks = FindObjectOfType<DirtBlocks>();
+        audioManager = FindObjectOfType<AudioManager>();
         myMask = GetComponentInChildren<SpriteMask>();
         objectGenerator = FindObjectOfType<ObjectGenerator>();
         stomachs = FindObjectOfType<Stomachs>();
         myRenderer = GetComponent<SpriteRenderer>();
+        myAudioSource = GetComponent<AudioSource>();
         myLight = GetComponentInChildren<Light2D>();
         myDefaultBrightness = myLight.intensity;
         myLight.intensity = 0;
         sparkleTimer = UnityEngine.Random.Range(sparkleTimerMin, sparkleTimerMax * 2);
+        sessionManager = FindObjectOfType<SessionManager>();
         if (objectGenerator.destroyedGem[myIndex])
         {
             myMask.sprite = brokenSprite;
@@ -116,6 +123,9 @@ public class SpawnedObject : MonoBehaviour
                 gemDebris.Play();
                 myLight.enabled = false;
                 sparkling = false;
+                sessionManager.gemCount++;
+                int randomClipIndex = UnityEngine.Random.Range(0, gemClips.Count);
+                AudioSource.PlayClipAtPoint(gemClips[randomClipIndex], xorn.transform.position, audioManager.sfxVol);
             }
         }
     }
