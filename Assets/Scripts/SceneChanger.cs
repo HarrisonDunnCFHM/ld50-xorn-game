@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    AudioManager audioManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.ResetSliders();
     }
 
     // Update is called once per frame

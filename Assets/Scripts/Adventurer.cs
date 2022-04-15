@@ -57,7 +57,7 @@ public class Adventurer : MonoBehaviour
 
     private void UpdateMoveCooldown()
     {
-        moveCooldown = normalMoveCooldown - sessionManager.gemCount/10;
+        moveCooldown = normalMoveCooldown - Mathf.Pow(1.01f,sessionManager.gemCount);
         if(moveCooldown < 0) { moveCooldown = 0; }
     }
 

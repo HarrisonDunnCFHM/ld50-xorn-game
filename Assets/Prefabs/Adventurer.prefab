@@ -98,8 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSpeed: 8
   pursuitSpeed: 5
-  normalMoveCooldown: 0.5
-  pursuitMoveCooldown: 0.1
+  normalMoveCooldown: 1.5
+  pursuitMoveCooldown: 1.1
   snapDistance: 0.1
   tilesVisited: []
   tilesVisitedCount: 

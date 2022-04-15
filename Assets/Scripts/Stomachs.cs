@@ -67,12 +67,9 @@ public class Stomachs : MonoBehaviour
         {
             redStomach.value -= redDecayRate;
         }
-        else if (greenStomach.value > 0)
+        else if (greenStomach.value > 0 || blueStomach.value > 0)
         {
             greenStomach.value = 0;
-        }
-        else if (blueStomach.value > 0)
-        {
             blueStomach.value = 0;
         }
         else

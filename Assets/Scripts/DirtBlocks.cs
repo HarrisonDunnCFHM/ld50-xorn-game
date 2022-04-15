@@ -75,7 +75,7 @@ public class DirtBlocks : MonoBehaviour
     private void PlayDirtNoise()
     {
         int randomIndex = UnityEngine.Random.Range(0,myAudioClips.Count);
-        AudioSource.PlayClipAtPoint(myAudioClips[randomIndex], xorn.transform.position, audioManager.sfxVol);
+        AudioSource.PlayClipAtPoint(myAudioClips[randomIndex], xorn.transform.position, audioManager.masterVolume * 2);
     }
 
     public void ChangeToGemTile(Vector3 gemLocation)

@@ -125,7 +125,7 @@ public class SpawnedObject : MonoBehaviour
                 sparkling = false;
                 sessionManager.gemCount++;
                 int randomClipIndex = UnityEngine.Random.Range(0, gemClips.Count);
-                AudioSource.PlayClipAtPoint(gemClips[randomClipIndex], xorn.transform.position, audioManager.sfxVol);
+                AudioSource.PlayClipAtPoint(gemClips[randomClipIndex], xorn.transform.position, audioManager.masterVolume);
             }
         }
     }
