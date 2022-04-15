@@ -24,7 +24,7 @@ public class Xorn : MonoBehaviour
     Transform myBody;
     Stomachs stomachs;
     float moveTimer;
-
+    public float destinationDistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -92,8 +92,8 @@ public class Xorn : MonoBehaviour
     {
         if (moving) { yield break; }
         moving = true;
-        float destinationDistance = Vector3.Distance(transform.position, destination);
-        while (destinationDistance > snapDistance)
+        destinationDistance = Vector3.Distance(transform.position, destination);
+        while (destinationDistance > snapDistance && destinationDistance < 1.1f)
         {
             destinationDistance = Vector3.Distance(transform.position, destination);
             transform.position += (direction * moveSpeed * Time.deltaTime);

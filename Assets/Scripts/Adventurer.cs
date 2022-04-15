@@ -234,7 +234,7 @@ public class Adventurer : MonoBehaviour
         moving = true; 
         float destinationDistance = 1f;
         var destination = transform.position + currentDirection;
-        while (destinationDistance > snapDistance)
+        while (destinationDistance > snapDistance && destinationDistance < 1.1f)
         {
             destinationDistance = Vector3.Distance(transform.position, destination);
             transform.position += ((Vector3)currentDirection * moveSpeed * Time.deltaTime);
