@@ -105,8 +105,6 @@ public class Xorn : MonoBehaviour
         SnapToGrid();
     }
 
-
-
     public void ControlAnimation()
     {
         myMask.sprite = myRenderer.sprite;
@@ -119,4 +117,6 @@ public class Xorn : MonoBehaviour
             myAnimator.StartPlayback();
         }
     }
+
+
 }

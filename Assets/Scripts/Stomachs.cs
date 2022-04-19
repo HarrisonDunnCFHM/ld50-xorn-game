@@ -21,18 +21,25 @@ public class Stomachs : MonoBehaviour
     [SerializeField] float redIngestRate;
     public float redDecayRate;
 
+    //cached references
+    Lava lava;
+    Xorn xorn;
+
     // Start is called before the first frame update
     void Start()
     {
         blueStomach.maxValue = blueMaxCapacity;
         greenStomach.maxValue = greenMaxCapacity;
         redStomach.maxValue = redMaxCapacity;
+        lava = FindObjectOfType<Lava>();
+        xorn = FindObjectOfType<Xorn>();
     }
 
     // Update is called once per frame
     void Update()
     {
         StomachDecay();
+        Lava();
     }
 
     private void StomachDecay()
@@ -75,6 +82,27 @@ public class Stomachs : MonoBehaviour
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    private void Lava()
+    {
+        Vector3Int roundedXornPos = Vector3Int.RoundToInt(xorn.transform.position);
+        {
+            if (lava.tileMap.HasTile(roundedXornPos))
+            {
+                if (redStomach.value > 0 || greenStomach.value > 0 || blueStomach.value > 0) 
+                { 
+                    redStomach.value = 0;
+                    greenStomach.value = 0;
+                    blueStomach.value = 0;
+                    lava.tileMap.SetTile(roundedXornPos, null);
+                }
+                else
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
+            }
         }
     }
 }

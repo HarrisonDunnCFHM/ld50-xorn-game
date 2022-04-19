@@ -16,12 +16,13 @@ public class ObjectGenerator : MonoBehaviour
     //cached references
     Xorn xorn;
     List<float> spawnThreshold = new List<float>();
-    public List<GameObject> spawnedObjects = new List<GameObject>();
+    List<GameObject> spawnedObjects = new List<GameObject>();
     
     //track all previously spawned objects - only set these once
     List<int> spawnedIndex = new List<int>();
     List<Vector3> spawnedPos = new List<Vector3>();
-    List<bool> spawnedActive = new List<bool>();
+    public List<bool> spawnedActive = new List<bool>();
+    public List<bool> respawnable = new List<bool>();
     List<GameObject> spawnedType = new List<GameObject>();
     public List<bool> destroyedGem = new List<bool>();
     public List<bool> maskActive = new List<bool>();
@@ -67,6 +68,7 @@ public class ObjectGenerator : MonoBehaviour
         spawnedActive.Insert(newSpawnIndex, true);
         destroyedGem.Insert(newSpawnIndex, false);
         maskActive.Insert(newSpawnIndex, false);
+        respawnable.Insert(newSpawnIndex, true);
         foreach(GameObject gameObject in spawnableObjects)
         {
             if (objectToSpawn == gameObject)
@@ -116,6 +118,7 @@ public class ObjectGenerator : MonoBehaviour
 
     private void CreatePreviousObject(int indexToSpawn)
     {
+        if (!respawnable[indexToSpawn]) { return; }
         var newSpawn = Instantiate(spawnedType[indexToSpawn], spawnedPos[indexToSpawn], Quaternion.identity);
         spawnedObjects.Add(newSpawn);
         newSpawn.name += indexToSpawn;

@@ -10,12 +10,15 @@ public class Lava : MonoBehaviour
     //config parameters
     [SerializeField] int halfSquareWidth;
     [SerializeField] TileBase ruleTile;
-    [SerializeField] Tilemap tileMap;
+    [SerializeField] public Tilemap tileMap;
     [SerializeField] int maxSpawnDistFromPlayer = 15;
     [SerializeField] int minSpawnDistFromPlayer = 10;
     [SerializeField] int floesToGenerate = 3;
     [SerializeField] int maxFloeLength = 10;
     [SerializeField] int minFloeLength = 3;
+    [SerializeField] float minGlowIntensity;
+    [SerializeField] float maxGlowIntensity;
+    [SerializeField] float glowChangeRate;
 
     //cached references
     Light2D lavaLight;
@@ -23,6 +26,8 @@ public class Lava : MonoBehaviour
     List<Vector3Int> lavaBridges = new List<Vector3Int>();
     List<Vector3Int> activeLavaTiles = new List<Vector3Int>();
     public List<Vector3Int> floeStartPoints = new List<Vector3Int>();
+    bool increasingGlow = true;
+    float glowTargetIntensity;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +35,37 @@ public class Lava : MonoBehaviour
         lavaLight = GetComponentInChildren<Light2D>();
         xorn = FindObjectOfType<Xorn>();
         GenerateLavaIsland();
+        lavaLight.intensity = minGlowIntensity;
+        glowTargetIntensity = maxGlowIntensity;
     }
 
     // Update is called once per frame
     void Update()
     {
         GenerateLavaFloes();
-        //LavaGlow();
+        LavaGlow();
+    }
+
+    private void LavaGlow()
+    {
+        if(increasingGlow && lavaLight.intensity < maxGlowIntensity)
+        {
+            lavaLight.intensity += glowChangeRate * Time.deltaTime;
+        }
+        else if(increasingGlow && lavaLight.intensity >= maxGlowIntensity)
+        {
+            increasingGlow = false;
+            glowTargetIntensity = UnityEngine.Random.Range(minGlowIntensity, maxGlowIntensity);
+        }
+        if(!increasingGlow && lavaLight.intensity > minGlowIntensity)
+        {
+            lavaLight.intensity -= glowChangeRate * Time.deltaTime;
+        }
+        else if(!increasingGlow && lavaLight.intensity <= minGlowIntensity)
+        {
+            increasingGlow = true;
+            glowTargetIntensity = UnityEngine.Random.Range(minGlowIntensity, maxGlowIntensity);
+        }
     }
 
     private void GenerateLavaFloes()

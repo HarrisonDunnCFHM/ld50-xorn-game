@@ -37,6 +37,7 @@ public class SpawnedObject : MonoBehaviour
     SessionManager sessionManager;
     AudioSource myAudioSource;
     AudioManager audioManager;
+    Lava lava;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,7 @@ public class SpawnedObject : MonoBehaviour
         myRenderer = GetComponent<SpriteRenderer>();
         myAudioSource = GetComponent<AudioSource>();
         myLight = GetComponentInChildren<Light2D>();
+        lava = FindObjectOfType<Lava>();
         myDefaultBrightness = myLight.intensity;
         myLight.intensity = 0;
         sparkleTimer = UnityEngine.Random.Range(sparkleTimerMin, sparkleTimerMax * 2);
@@ -70,6 +72,7 @@ public class SpawnedObject : MonoBehaviour
         GetEaten();
         Flicker();
         myMask.enabled = objectGenerator.maskActive[myIndex];
+        RemoveUnderLava();
     }
 
     private void Flicker()
@@ -138,6 +141,16 @@ public class SpawnedObject : MonoBehaviour
             dirtBlocks.ChangeToGemTile(transform.position);
             objectGenerator.maskActive[myIndex] = true;
             myMask.enabled = true;
+        }
+    }
+
+    private void RemoveUnderLava()
+    {
+        if (lava.tileMap.HasTile(Vector3Int.RoundToInt(transform.position)))
+        {
+            objectGenerator.respawnable[myIndex] = false;
+            objectGenerator.spawnedActive[myIndex] = false;
+            gameObject.SetActive(false);
         }
     }
 }
