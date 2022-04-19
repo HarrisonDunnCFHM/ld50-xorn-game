@@ -7,7 +7,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class SpawnedObject : MonoBehaviour
 {
-    public enum GemColor { red, blue, green };
+    public enum GemColor { red, blue, green, metal };
     
     //config params
     [SerializeField] float sparkleTimerMax;

@@ -47,6 +47,9 @@ TagManager:
   - name: Dirt
     uniqueID: 1365581285
     locked: 0
+  - name: Lava
+    uniqueID: 1728142835
+    locked: 0
   - name: Cave Filter
     uniqueID: 3677150165
     locked: 0

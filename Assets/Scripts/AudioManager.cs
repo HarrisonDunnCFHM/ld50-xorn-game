@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         UpdateSliders();
-        myMusic.volume = masterVolume/6;
+        myMusic.volume = masterVolume;
     }
 
     public void ResetSliders()
