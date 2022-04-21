@@ -770,6 +770,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Adventurer Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 410724244357585755, guid: dd3dc04d8cba3234fa05dcb08aeb52b1, type: 3}
+      propertyPath: maxAdventurers
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd3dc04d8cba3234fa05dcb08aeb52b1, type: 3}
 --- !u!1001 &667103573478592247
@@ -1659,8 +1663,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
+      propertyPath: redDecayRate
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
+      propertyPath: blueDecayRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
+      propertyPath: redIngestRate
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
+      propertyPath: blueIngestRate
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
+      propertyPath: greenDecayRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
       propertyPath: redMaxCapacity
-      value: 10
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760528581041078318, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}
+      propertyPath: greenMaxCapacity
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fddd4a6ff8526f4cbb3b93de1b6132f, type: 3}

@@ -44,9 +44,9 @@ public class Stomachs : MonoBehaviour
 
     private void StomachDecay()
     {
-        //blueStomach.value -= Time.deltaTime * blueDecayRate;
+        blueStomach.value -= Time.deltaTime * greenDecayRate;
         greenStomach.value -= Time.deltaTime * greenDecayRate;
-        //redStomach.value -= Time.deltaTime * redDecayRate;
+        redStomach.value -= Time.deltaTime * greenDecayRate;
     }
 
     public void IngestGem(SpawnedObject.GemColor gemColor)
